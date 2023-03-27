@@ -9,8 +9,13 @@ import numpy as np
 global games_dat
 # Sales in NA
 global game_sales_NA
+global game_sales_NA_dur
+global game_sales_NA_pre
+global game_sales_NA_pos
 # Sales Globally
 global game_sales_GLO
+
+# Crime Data
 # Crime Recorded in The US
 global crime_US
 # Crime Recorded in Canada
@@ -67,3 +72,15 @@ crime_year_max = min(crime_US['report_year'].max(), crime_CA['year'].max())
 
 crime_CA = crime_CA[(crime_CA['year'] >= crime_year_min) & (crime_CA['year'] <= crime_year_max)]
 crime_US = crime_US[(crime_US['report_year'] >= crime_year_min) & (crime_US['report_year'] <= crime_year_max)]
+
+
+
+# Updating the NA game dataset to fit with the time ranges
+game_sales_NA_dur = game_sales_NA[(game_sales_NA['Year'] >= crime_year_min) & (game_sales_NA['Year'] <= crime_year_max)]
+
+game_sales_NA_pre = game_sales_NA[game_sales_NA['Year'] < crime_year_min]
+
+game_sales_NA_pos = game_sales_NA[game_sales_NA['Year'] > crime_year_max]
+
+print(f"Game Sales for NA:\n{game_sales_NA.head(10)}\nWith minimum year being: {game_sales_NA['Year'].min()}")
+print(f"Game Sales Globally:\n{game_sales_GLO.head(10)}\nWith minimum year being: {game_sales_GLO['Year'].min()}")
