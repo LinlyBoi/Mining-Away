@@ -2,8 +2,6 @@
 import pandas as pd
 import numpy as np
 
-global games_merged_dat
-
 
 # Defining useful Functions to be used later
 def slice_column(input_df, column, expression=" "):
