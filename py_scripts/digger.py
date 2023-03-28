@@ -21,11 +21,10 @@ df2 = pd.read_csv("vgsales-12-4-2019-short.csv")
 
 #                    merging
 
-df_compine = df1.merge(df2, left_on="Name", right_on="Name", how="left")
-print(df_compine)
-df_compine.to_csv("output_final_df.csv")
-df = df_compine
-output_df = "N There U Have It"
+combined_df = df1.merge(df2, left_on="Name", right_on="Name", how="left")
+print(combined_df)
+combined_df.to_csv("output_final_df.csv")
+df = combined_df
 
 # ---------------------------------------------------------
 
