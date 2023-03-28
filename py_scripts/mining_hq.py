@@ -24,6 +24,27 @@ games_merged_dat = digger.write_joined_df(games_sales, games_review_final)
 games_merged_dat.to_csv("datasets/videogames/games_merged.csv")
 
 import gunner
+
+NA_col_list = [
+    "PAL_Sales",
+    "JP_Sales",
+    "Other_Sales",
+    "Global_Sales",
+    "User_Score",
+    "GameName",
+    "Review",
+    "",
+]
+GLO_col_list = [
+    "PAL_Sales",
+    "JP_Sales",
+    "Other_Sales",
+    "NA_Sales",
+    "User_Score",
+    "GameName",
+    "Review",
+    "",
+]
 # Collecting Split-Up Datasets
 games_sales_split_pre = gunner.game_sales_NA_pre
 
