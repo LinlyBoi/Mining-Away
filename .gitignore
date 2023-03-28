@@ -131,3 +131,4 @@ dmypy.json
 .vscode/
 jupyter-notes/merged_games.csv
 datasets/videogames/vgsales.csv
+datasets/videogames/games_merged.csv
