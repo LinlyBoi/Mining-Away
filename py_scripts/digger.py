@@ -39,3 +39,8 @@ def slice_column(input_df, output_df, column, expression=" "):
     input_df = input_df.drop(columns=[column])
     input_df[column] = clean
     input_df.to_csv(output_df)
+
+
+def write_joined_df(left, right, output_file, lsuf="new_key"):
+    merged = left.join(right, lsuffix=lsuf)
+    merged.to_csv(output_file)
