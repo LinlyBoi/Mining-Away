@@ -3,8 +3,7 @@
 import pandas as pd
 import numpy as np
 import seaborn as sns
-import digger
-import gunner
+import digger, gunner
 
 # Instantiating globals to be used in other files
 global games_merged_dat
@@ -24,7 +23,7 @@ games_review_final = digger.slice_column(games_review, "GameName", "(Import)")
 games_merged_dat = digger.write_joined_df(games_sales, games_review_final)
 
 # Acquisition of Merged dataset
-print(games_merged_dat.isnull())
+print(games_merged_dat.count())
 games_merged_dat.to_csv("datasets/videogames/games_merged.csv")
 
 # Loading Crime Datasets
@@ -70,22 +69,22 @@ games_merged_dat = gunner.drop_kick(NA_col_list, games_merged_dat)
 
 sale_tri_split = gunner.trisect_by_year(games_merged_dat, 'Year', year_interval)
 
-game_sales_split_pre = sale_tri_split[0]
-game_sales_split_dur = sale_tri_split[1]
-game_sales_split_pos = sale_tri_split[2]
+games_sales_split_pre = sale_tri_split[0]
+games_sales_split_dur = sale_tri_split[1]
+games_sales_split_pos = sale_tri_split[2]
 
 # Displaying Acquired Data
 print("Acquired Datasets:\n")
-print(game_sales_split_pre.head(5),
-game_sales_split_dur.head(5),
-game_sales_split_pos.head(5))
+print(games_sales_split_pre.head(5),
+games_sales_split_dur.head(5),
+games_sales_split_pos.head(5))
 
 print("Dataset Info:\n")
-game_sales_split_pre.info()
-game_sales_split_dur.info()
-game_sales_split_pos.info()
+games_sales_split_pre.info()
+games_sales_split_dur.info()
+games_sales_split_pos.info()
 
-print(game_sales_split_dur.describe())
+print(games_sales_split_dur.describe())
 
 # Required to use binning for cleaning, idk
 # https://towardsdatascience.com/data-preprocessing-with-python-pandas-part-5-binning-c5bd5fd1b950
