@@ -15,8 +15,8 @@ global games_sales_split_pos
 games_review = pd.read_csv("datasets/videogames/Games.xls")
 games_sales = pd.read_csv("datasets/videogames/vgsales-12-4-2019-short.csv")
 
-print(games_review.isnull())
-print(games_sales.isnull())
+print(games_review.count())
+print(games_sales.count())
 
 games_review_phase1 = digger.slice_column(games_review, "GameName", "Review")
 games_review_final = digger.slice_column(games_review, "GameName", "(Import)")
@@ -86,3 +86,10 @@ game_sales_split_dur.info()
 game_sales_split_pos.info()
 
 print(game_sales_split_dur.describe())
+
+# Required to use binning for cleaning, idk
+# https://towardsdatascience.com/data-preprocessing-with-python-pandas-part-5-binning-c5bd5fd1b950
+
+# Also need to transform using Z-score (normal distr go brrrr lmao), or min-max
+
+# Need similarity and dissimialrity, scipy time
