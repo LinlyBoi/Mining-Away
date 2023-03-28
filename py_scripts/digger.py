@@ -30,7 +30,6 @@ output_df = "N There U Have It"
 # ---------------------------------------------------------
 
 
-#                          CLEANING -> REMOVING THE WORD REVIOW AND ANY THING AFTER IT
 def slice_column(input_df, output_df, column, expression=" "):
     unclean = input_df[column].to_list()
     clean = list()
