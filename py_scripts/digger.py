@@ -2,33 +2,20 @@
 import pandas as pd
 import numpy as np
 
+global games_merged_dat
+
 # reading the data
 # -> MAKE SURE OF THE DATA FRAMES NAMES PEFORE YOU RUN IT
 
+games_dat = pd.read_csv("Games.xls")
+games_sales_dat = pd.read_csv("vgsales-12-4-2019-short.csv")
 
-df1 = pd.read_csv("output_6th_df.csv")
-df2 = pd.read_csv("vgsales-12-4-2019-short.csv")
+games_merged_dat = games_dat.merge(games_sales_dat, left_on="Name", right_on="Name", how="left")
+print(games_merged_dat)
 
+games_merged_dat.to_csv("output_final_df.csv")
 
-# ----------------------------------------------------------
-
-
-# print(pf1.head)
-# print(pf2.head)
-
-# ---------------------------------------------------------
-
-
-#                    merging
-
-combined_df = df1.merge(df2, left_on="Name", right_on="Name", how="left")
-print(combined_df)
-combined_df.to_csv("output_final_df.csv")
-df = combined_df
-
-# ---------------------------------------------------------
-
-
+# Defining useful Functions to be used later
 def slice_column(input_df, output_df, column, expression=" "):
     unclean = input_df[column].to_list()
     clean = list()

@@ -22,37 +22,34 @@ global crime_US
 global crime_CA
 
 # Loading Datasets
-game_sales_dat = pd.read_csv('datasets/videogames/vgsales-12-4-2019-short.csv')
-games_dat = pd.read_csv('datasets/videogames/Games.xls')
+games_merged = pd.read_csv('datasets/videogames/merged_games.csv')
 
 crime_CA = pd.read_excel('datasets/crime/clean_crime_canada_dataset.xlsx')
 crime_US = pd.read_csv('datasets/crime/report.csv')
 
 # Printing information regarding datasets
 print("Game Datasets' Info:\n")
-game_sales_dat.info()
-games_dat.info()
+games_merged.info()
 
 print("Crime Datasets' Info:\n")
 crime_US.info()
 crime_CA.info()
 
 # Printing First n values (index start: 0)
-print("Game Sale Data:\n", game_sales_dat.head(10))
-print("Game Scores:\n", games_dat.head(10))
+print("Game Sale Data:\n", games_merged.head(5))
 
-print("US Crime Data:\n", crime_US.head(10))
-print("CA Crime Data:\n", crime_CA.head(10))
+print("US Crime Data:\n", crime_US.head(5))
+print("CA Crime Data:\n", crime_CA.head(5))
 
 # Regarding the Games.xls dataset:
 # Coercing the non-numeric values will result in NaN
 # thus allowing easier removal through `.notnull()`
-games_dat['Score'] = pd.to_numeric(games_dat['Score'], errors = 'coerce')
+games_merged['Score'] = pd.to_numeric(games_merged['Score'], errors = 'coerce')
 
-games_dat = games_dat[games_dat['Score'].notnull()]
+games_merged = games_merged[games_merged['Score'].notnull()]
 
-print("Game Scores (Cleaned):\n", games_dat.head())
-games_dat.info()
+print("Game Scores (Cleaned):\n", games_merged.head())
+games_merged.info()
 
 # Regarding the vgsales-12-4-2019 dataset
 # Considering we will be using a US (probs CA too) crime datasets
@@ -60,8 +57,8 @@ games_dat.info()
 NA_col_list = ['PAL_Sales', 'JP_Sales', 'Other_Sales', 'Global_Sales']
 GLO_col_list = ['PAL_Sales', 'JP_Sales', 'Other_Sales', 'NA_Sales']
 
-game_sales_NA = game_sales_dat.drop(columns = NA_col_list, axis = 1)
-game_sales_GLO = game_sales_dat.drop(columns = GLO_col_list, axis = 1)
+game_sales_NA = games_merged.drop(columns = NA_col_list, axis = 1)
+game_sales_GLO = games_merged.drop(columns = GLO_col_list, axis = 1)
 
 print(f"Game Sales for NA:\n{game_sales_NA.head(10)} \nWith minimum year being: {game_sales_NA['Year'].min()}")
 print(f"Game Sales Globally:\n{game_sales_GLO.head(10)}\nWith minimum year being: {game_sales_GLO['Year'].min()}")
