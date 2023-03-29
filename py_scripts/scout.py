@@ -4,8 +4,9 @@ from sklearn.impute import SimpleImputer
 import numpy as np
 
 
-def cure_depression(dataset, column):
+# Column2 is the column you're grouping by using the given values pls
+def cure_depression(dataset, column, column2, values):
+    # Allegedly for loop here )
     dataset[column].fillna(dataset[column].mean(), inplace=True)
-    print("what you want")
-    print(dataset)
+    #    print(dataset)
     return dataset[column].to_list()
