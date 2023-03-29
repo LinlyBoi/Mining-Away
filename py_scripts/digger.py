@@ -19,3 +19,8 @@ def slice_column(input_df, column, expression=" "):
 def write_joined_df(left, right, lsuf="new_key"):
     merged = pd.concat([left, right], sort=False, ignore_index=True)  # Good
     return merged
+
+
+def slam_dunk(dataset, column, size):
+    dataset["dunked"] = pd.qcut(dataset[column], q=3)
+    return dataset["dunked"]
