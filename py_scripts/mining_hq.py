@@ -106,6 +106,4 @@ print(
 # Load merged gammas
 
 gammas = pd.read_csv("datasets/videogames/games_merged.csv")
-print(digger.slam_dunk(gammas, "User_Score", 5))
 gammas["User_Score"] = scout.cure_depression(gammas, "User_Score")
-print(gammas["User_Score"])
