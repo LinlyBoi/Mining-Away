@@ -108,7 +108,7 @@ gammas['Critic_Score_Norm'] = scout.scaling_zscore(gammas, 'Critic_Score')
 print(gammas['Critic_Score_Norm'].head(10))
 
 # Saving all into a file
-gammas.to_csv("output.csv", index=False)
+gammas.to_csv("datasets/videogames/games_cleanish.csv", index=False)
 
 # Need similarity and dissimialrity, scipy time
 # Selecting 5 random rows
@@ -116,4 +116,4 @@ chosen_idx = np.random.choice(len(gammas), replace = False, size = 5)
 sample_rows = gammas.iloc[chosen_idx]
 print(sample_rows.head())
 
-# scout.dissimilarity(sample_rows.select_dtypes(include = np.number))
+scout.dissimilarity(sample_rows)

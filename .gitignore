@@ -127,12 +127,16 @@ dmypy.json
 
 # Pyre type checker
 .pyre/
+
 # vscode settings conflic shuns
 .vscode/
-jupyter-notes/merged_games.csv
-datasets/videogames/games_merged.csv
-output.csv
-.gitignore
-output.xlsx
-.gitignore
 datasets/videogames/merged_games.xlsx
+datasets/videogames/games_merged.csv
+datasets/videogames/games_cleanish.csv
+
+jupyter-notes/merged_games.csv
+
+output.csv
+output.xlsx
+
+.gitignore
