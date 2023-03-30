@@ -78,15 +78,6 @@ games_sales_split_dur = sale_tri_split[1]
 games_sales_split_pos = sale_tri_split[2]
 
 # Displaying Acquired Data
-print("Acquired Datasets:\n")
-print(sale_tri_split[0].head(5), sale_tri_split[1].head(5), sale_tri_split[2].head(5))
-
-print("Dataset Info:\n")
-sale_tri_split[0].info()
-sale_tri_split[1].info()
-sale_tri_split[2].info()
-
-
 print("Dataset Info:\n")
 games_sales_split_pre.info()
 games_sales_split_dur.info()
@@ -113,8 +104,8 @@ gammas = digger.slam_dunk(gammas, "Critic_Score", labels=labels)
 # Also need to transform using Z-score (normal distr go brrrr lmao), or min-max
 # ah, scheiße
 # nvm, done, kekW
-gammas['Critic_Score'] = scout.scaling_zscore(gammas, 'Critic_Score')
-print(gammas['Critic_Score'].head(10))
+gammas['Critic_Score_Norm'] = scout.scaling_zscore(gammas, 'Critic_Score')
+print(gammas['Critic_Score_Norm'].head(10))
 
 # Saving all into a file
 gammas.to_csv("output.csv", index=False)
@@ -125,4 +116,4 @@ chosen_idx = np.random.choice(len(gammas), replace = False, size = 5)
 sample_rows = gammas.iloc[chosen_idx]
 print(sample_rows.head())
 
-scout.dissimilarity(sample_rows.select_dtypes(include = np.number))
+# scout.dissimilarity(sample_rows.select_dtypes(include = np.number))
