@@ -22,13 +22,13 @@ games_fig2_pre = sns.histplot(data = games_pre, x = "Year", hue = "Genre", multi
 plt.show()
 
 plt.xticks(rotation = 90)
-games_fig_dur = sns.barplot(data = games_dur, x = "Year", y = "NA_Sales")
+games_fig_dur = sns.barplot(data = games_dur, x = "Year", y = "NA_Sales", estimator=count_nonzero)
 plt.show()
 
 plt.xticks(rotation = 90)
-games_fig_pos = sns.barplot(data = games_pos, x = "Year", y = "NA_Sales")
+games_fig_pos = sns.barplot(data = games_pos, x = "Year", y = "NA_Sales", estimator=count_nonzero)
 plt.show()
 
 plt.xticks(rotation = 90)
-crime_CA_fig = sns.barplot(data = crime_CA, x = "year", y = "incidents")
+crime_CA_fig = sns.barplot(data = crime_CA, x = "year", y = "incidents", estimator=count_nonzero)
 plt.show()

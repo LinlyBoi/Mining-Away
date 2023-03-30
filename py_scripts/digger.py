@@ -21,13 +21,15 @@ def write_joined_df(left, right, lsuf="new_key"):
     return merged
 
 
-def slam_dunk(dataset, column, size, labels):
+def slam_dunk(dataset, column, labels):
     min_value = dataset[column].min()
     max_value = dataset[column].max()
-    bins = np.linspace(min_value, max_value, size)
+    print("min: ", min_value, " max: ", max_value)
+    bins = np.linspace(min_value, max_value, len(labels) + 1)
+    bins
 
     dunked_column = "bin_" + column
     dataset[dunked_column] = pd.cut(
         dataset[column], bins=bins, labels=labels, include_lowest=True
     )
-    return dataset[dunked_column]
+    return dataset

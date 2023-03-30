@@ -25,7 +25,6 @@ games_merged_dat = digger.write_joined_df(games_sales, games_review_final)
 
 # Acquisition of Merged dataset
 print(games_merged_dat.count())
-games_merged_dat.to_csv("datasets/videogames/games_merged.csv", index=False)
 
 # Loading Crime Datasets
 crime_CA = pd.read_excel("datasets/crime/clean_crime_canada_dataset.xlsx")
@@ -50,23 +49,26 @@ NA_col_list = [
     "JP_Sales",
     "Other_Sales",
     "Global_Sales",
-    "User_Score",
     "GameName",
     "Review",
+    "Console",
+    "Score",
 ]
 GLO_col_list = [
     "PAL_Sales",
     "JP_Sales",
     "Other_Sales",
     "NA_Sales",
-    "User_Score",
     "GameName",
     "Review",
+    "Console",
+    "Score",
 ]
 
 # Splitting crime datasets
 # Collecting Split-Up Datasets
 games_merged_dat = gunner.drop_kick(NA_col_list, games_merged_dat)
+games_merged_dat.to_csv("datasets/videogames/games_merged.csv", index=False)
 
 sale_tri_split = gunner.trisect_by_year(games_merged_dat, "Year", year_interval)
 
@@ -89,7 +91,7 @@ games_sales_split_pre.info()
 games_sales_split_dur.info()
 games_sales_split_pos.info()
 
-print(games_sales_split_dur.describe())
+print("Yer forsaken Statistical Description:\n", games_sales_split_dur.describe())
 
 print(
     games_sales_split_pre.head(5),
@@ -105,10 +107,9 @@ print(
 
 # Load merged gammas
 
-gammas = pd.read_excel("datasets/videogames/merged_games.xlsx")
+gammas = pd.read_csv("datasets/videogames/games_merged.csv")
 labels = ["smol", "epik", "larg"]
-gammas["User_Score"] = digger.slam_dunk(gammas, "User_Score", 3, labels=labels)
-gammas = gammas[gammas["Genre"].isna() == False]
-gammas = scout.cure_depression(gammas)
+gammas = digger.slam_dunk(gammas, "Critic_Score", labels=labels)
+# gammas = gammas[gammas["Genre"].isna() == False]
+# gammas = scout.cure_depression(gammas)
 gammas.to_csv("output.csv", index=False)
-scout.regression_expression(gammas, "Global_Sales", 0)
