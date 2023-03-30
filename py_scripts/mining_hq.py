@@ -25,7 +25,7 @@ games_merged_dat = digger.write_joined_df(games_sales, games_review_final)
 
 # Acquisition of Merged dataset
 print(games_merged_dat.count())
-games_merged_dat.to_csv("datasets/videogames/games_merged.csv")
+games_merged_dat.to_csv("datasets/videogames/games_merged.csv", index=False)
 
 # Loading Crime Datasets
 crime_CA = pd.read_excel("datasets/crime/clean_crime_canada_dataset.xlsx")
@@ -105,5 +105,10 @@ print(
 
 # Load merged gammas
 
-gammas = pd.read_csv("datasets/videogames/games_merged.csv")
-gammas["User_Score"] = scout.cure_depression(gammas, "User_Score")
+gammas = pd.read_excel("datasets/videogames/merged_games.xlsx")
+labels = ["smol", "epik", "larg"]
+gammas["User_Score"] = digger.slam_dunk(gammas, "User_Score", 3, labels=labels)
+gammas = gammas[gammas["Genre"].isna() == False]
+gammas = scout.cure_depression(gammas)
+gammas.to_csv("output.csv", index=False)
+scout.regression_expression(gammas, "Global_Sales", 0)
