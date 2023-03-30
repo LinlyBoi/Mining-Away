@@ -1,10 +1,11 @@
 # Instantiating Main Python Script File
 # Collects stuff from the rest of the scripts
 import pandas as pd
-import scout
 import numpy as np
 import seaborn as sns
-import digger, gunner
+# containment breach
+import scipy as scp
+import digger, gunner, scout
 
 # Instantiating globals to be used in other files
 global games_merged_dat
@@ -48,6 +49,7 @@ NA_col_list = [
     "JP_Sales",
     "Other_Sales",
     "Global_Sales",
+    "PAL_Sales",
     "GameName",
     "Review",
     "Console",
@@ -57,6 +59,7 @@ GLO_col_list = [
     "JP_Sales",
     "Other_Sales",
     "NA_Sales",
+    "PAL_Sales",
     "GameName",
     "Review",
     "Console",
@@ -96,18 +99,30 @@ print(
     games_sales_split_dur.head(5),
     games_sales_split_pos.head(5),
 )
-# Required to use binning for cleaning, idk
-# https://towardsdatascience.com/data-preprocessing-with-python-pandas-part-5-binning-c5bd5fd1b950
-
-# Also need to transform using Z-score (normal distr go brrrr lmao), or min-max
-
-# Need similarity and dissimialrity, scipy time
 
 # Load merged gammas
 
+# Required to use binning for cleaning, idk (DONE LESGOOOOOOOOOOOOOOOOOOOO)
+# https://towardsdatascience.com/data-preprocessing-with-python-pandas-part-5-binning-c5bd5fd1b950
 gammas = pd.read_csv("datasets/videogames/games_merged.csv")
 labels = ["smol", "epik", "larg"]
 gammas = digger.slam_dunk(gammas, "Critic_Score", labels=labels)
 # gammas = gammas[gammas["Genre"].isna() == False]
 # gammas = scout.cure_depression(gammas)
+
+# Also need to transform using Z-score (normal distr go brrrr lmao), or min-max
+# ah, scheiße
+# nvm, done, kekW
+gammas['Critic_Score'] = scout.scaling_zscore(gammas, 'Critic_Score')
+print(gammas['Critic_Score'].head(10))
+
+# Saving all into a file
 gammas.to_csv("output.csv", index=False)
+
+# Need similarity and dissimialrity, scipy time
+# Selecting 5 random rows
+chosen_idx = np.random.choice(len(gammas), replace = False, size = 5)
+sample_rows = gammas.iloc[chosen_idx]
+print(sample_rows.head())
+
+scout.dissimilarity(sample_rows.select_dtypes(include = np.number))

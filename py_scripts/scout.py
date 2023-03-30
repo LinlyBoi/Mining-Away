@@ -2,6 +2,8 @@
 from sklearn.linear_model import LinearRegression
 from sklearn.impute import SimpleImputer
 from sklearn import preprocessing
+from scipy.spatial import distance
+import scipy.stats as stats
 import numpy as np
 import pandas as pd
 
@@ -43,9 +45,16 @@ def regression_expression(dataset, column, missing_value):
 # https://scikit-learn.org/stable/modules/preprocessing.html#preprocessing
 # That helps ^
 # This boi should work, idk i'm implementing blindly
-def scaling_zscore(datashitter, col):
-    scaler = preprocessing.StandardScaler().fit(datashitter[col])
-    return scaler.transform(datashitter[col])
+def scaling_zscore(dataframe, col):
+    return stats.zscore(dataframe[col],axis = 0,  nan_policy= "omit")
+
+def dissimilarity(row_arr):
+    for i in len(row_arr):
+        print("| ")
+        for j in len(row_arr):
+            eucDist = distance.euclidean(row_arr.iloc[i], row_arr.iloc[j])
+            print(f"Dissim {i}{j}: {eucDist} |")
+        print("\n")
 
 def scaling_range(datashitter, col):
     nonnull = datashitter[col].isna()
