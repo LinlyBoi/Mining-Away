@@ -130,10 +130,8 @@ dmypy.json
 # vscode settings conflic shuns
 .vscode/
 jupyter-notes/merged_games.csv
-datasets/videogames/vgsales.csv
 datasets/videogames/games_merged.csv
 output.csv
 .gitignore
 output.xlsx
 .gitignore
-datasets/videogames/merged_games.xlsx

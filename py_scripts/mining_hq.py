@@ -13,7 +13,7 @@ global games_sales_split_dur
 global games_sales_split_pos
 
 games_review = pd.read_csv("datasets/videogames/Games.xls")
-games_sales = pd.read_csv("datasets/videogames/vgsales-12-4-2019-short.csv")
+games_sales = pd.read_csv("datasets/videogames/vgsales.csv")
 
 print(games_review.count())
 print(games_sales.count())
@@ -45,7 +45,6 @@ crime_US_intersect = crime_intersect[0]
 crime_CA_intersect = crime_intersect[1]
 
 NA_col_list = [
-    "PAL_Sales",
     "JP_Sales",
     "Other_Sales",
     "Global_Sales",
@@ -55,7 +54,6 @@ NA_col_list = [
     "Score",
 ]
 GLO_col_list = [
-    "PAL_Sales",
     "JP_Sales",
     "Other_Sales",
     "NA_Sales",
