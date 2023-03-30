@@ -13,7 +13,7 @@ global games_sales_split_dur
 global games_sales_split_pos
 
 games_review = pd.read_csv("datasets/videogames/Games.xls")
-games_sales = pd.read_csv("datasets/videogames/vgsales.csv")
+games_sales = scout.cure_depression(pd.read_csv("datasets/videogames/vgsales-12-4-2019-short.csv"))
 
 print(games_review.count())
 print(games_sales.count())

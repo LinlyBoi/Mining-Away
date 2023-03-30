@@ -22,11 +22,11 @@ games_fig2_pre = sns.histplot(data = games_pre, x = "Year", hue = "Genre", multi
 plt.show()
 
 plt.xticks(rotation = 90)
-games_fig_dur = sns.barplot(data = games_dur, x = "Year", y = "NA_Sales", estimator=count_nonzero)
+games_fig_dur = sns.barplot(data = games_dur, x = "Year", y = "NA_Sales")
 plt.show()
 
 plt.xticks(rotation = 90)
-games_fig_pos = sns.barplot(data = games_pos, x = "Year", y = "NA_Sales", estimator=count_nonzero)
+games_fig_pos = sns.barplot(data = games_pos, x = "Year", y = "NA_Sales")
 plt.show()
 
 plt.xticks(rotation = 90)
