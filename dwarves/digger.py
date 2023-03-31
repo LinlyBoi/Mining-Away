@@ -40,11 +40,16 @@ def slam_dunk(dataset, column, labels):
 
     x_data = np.arange(0, len(dataset))
     y_data = dataset[column]
-    x_bins, bin_edges, misc = binned_statistic(y_data, x_data, statistic='median', bins=len(labels))
+    x_bins, bin_edges, misc = binned_statistic(
+        y_data, x_data, statistic="median", bins=len(labels)
+    )
     bin_intervals = pd.IntervalIndex.from_arrays(bin_edges[:-1], bin_edges[1:])
-    dataset['bin_value'] = dataset[column].apply(lambda x: set_to_median(x, bin_intervals))
+    dataset["bin_value"] = dataset[column].apply(
+        lambda x: set_to_median(x, bin_intervals)
+    )
 
     return dataset
+
 
 def set_to_median(x, bin_intervals):
     for interval in bin_intervals:

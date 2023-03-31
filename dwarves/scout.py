@@ -52,12 +52,24 @@ def dissimilarity(row_arr):
     row_arr = row_arr.select_dtypes(include = np.number)
     row_arr = row_arr.drop('Rank', axis = 1)
     
-    print("          |  Entry 1 | Entry 2 | Entry 3 | Entry 4 | Entry 5 |")
+    print("  Dissim  |  Entry 1 | Entry 2 | Entry 3 | Entry 4 | Entry 5 |")
     for i in range(len(row_arr)):
         print("Entry " , i + 1, " | ", end = "")
         for j in range(len(row_arr)):
             eucDist = distance.euclidean(row_arr.iloc[i], row_arr.iloc[j])
             print(" {:#.6g} |".format(eucDist), end = "")
+        print("\n")
+
+def similarity(row_arr):
+    row_arr = row_arr.select_dtypes(include = np.number)
+    row_arr = row_arr.drop('Rank', axis = 1)
+
+    print("Similarity|  Entry 1 | Entry 2 | Entry 3 | Entry 4 | Entry 5 |")
+    for i in range(len(row_arr)):
+        print("Entry ", i + 1, " | ", end = "")
+        for j in range(len(row_arr)):
+            sim = 1 - distance.cosine(row_arr.iloc[i], row_arr.iloc[j])
+            print(" {:#.6g} |".format(sim), end = "")
         print("\n")
 
 def scaling_range(datashitter, col):
