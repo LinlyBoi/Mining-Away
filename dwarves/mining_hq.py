@@ -116,3 +116,4 @@ sample_rows = gammas.iloc[chosen_idx]
 print(sample_rows.head())
 
 scout.dissimilarity(sample_rows)
+scout.similarity(sample_rows)
