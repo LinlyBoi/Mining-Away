@@ -41,11 +41,11 @@ games_fig_pos = sns.histplot(data = games_pos, x = "Year")
 plt.show()
 
 plt.xticks(rotation = 90)
-crime_CA_fig = sns.histplot(data = crime_CA, x = "year")
+crime_CA_fig = sns.barplot(data = crime_CA, x = "year", y = 'incident_sum')
 plt.show()
 
 plt.xticks(rotation = 90)
-crime_US_fig = sns.histplot(data = crime_US, x = "report_year")
+crime_US_fig = sns.barplot(data = crime_US, x = "report_year", y = "sum_violence")
 plt.show()
 
 games_dur['Violent_US'] = crime_US['violent_crimes']
