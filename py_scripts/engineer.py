@@ -1,6 +1,7 @@
 # Visualisations for Data
 import matplotlib.pyplot as plt
 import seaborn as sns
+import pandas as pd
 import mining_hq
 from numpy import count_nonzero
 
@@ -20,19 +21,28 @@ games_fig_pre = sns.histplot(data = games_pre, x = "Year", palette = sns.color_p
 plt.show()
 
 plt.xticks(rotation = 90)
-games_fig2_pre = sns.histplot(data = games_pre, x = "Year", hue = "Genre", multiple = "stack", shrink = 0.65)
+games_fig2_pre = sns.histplot(data = games_pre, x = "Year", hue = "Genre", multiple = "stack", kde = True)
 plt.show()
 
 plt.xticks(rotation = 90)
-games_fig_dur = sns.barplot(data = games_dur, x = "Year", y = "NA_Sales")
-plt.xlabel("Years")
-plt.ylabel("Sales in North America (Canada, USA)")
+games_fig_dur = sns.histplot(data = games_dur, x = "Year", kde = True)
 plt.show()
 
 plt.xticks(rotation = 90)
-games_fig_pos = sns.barplot(data = games_pos, x = "Year", y = "NA_Sales")
+games_fig_pos = sns.histplot(data = games_pos, x = "Year")
 plt.show()
 
 plt.xticks(rotation = 90)
-crime_CA_fig = sns.barplot(data = crime_CA, x = "year", y = "incidents", estimator=count_nonzero)
+crime_CA_fig = sns.histplot(data = crime_CA, x = "year")
+plt.show()
+
+plt.xticks(rotation = 90)
+crime_US_fig = sns.histplot(data = crime_US, x = "report_year")
+plt.show()
+
+games_dur['Violent_US'] = crime_US['violent_crimes']
+games_dur['NA_Sales'] = games_dur['NA_Sales'].multiply(1000)
+
+plt.xticks(rotation = 90)
+games_violence_US = sns.relplot(data = games_dur, x = 'NA_Sales', y = 'Violent_US')
 plt.show()
