@@ -29,6 +29,14 @@ games_fig_dur = sns.histplot(data = games_dur, x = "Year", kde = True)
 plt.show()
 
 plt.xticks(rotation = 90)
+games_fig2_dur = sns.histplot(data = games_dur, x = "Year", hue = "Genre", multiple = "stack", kde = True)
+plt.show()
+
+plt.xticks(rotation = 90)
+games_fig3_dur = sns.jointplot(data = games_dur, x = "Year")
+plt.show()
+
+plt.xticks(rotation = 90)
 games_fig_pos = sns.histplot(data = games_pos, x = "Year")
 plt.show()
 
@@ -45,4 +53,8 @@ games_dur['NA_Sales'] = games_dur['NA_Sales'].multiply(1000)
 
 plt.xticks(rotation = 90)
 games_violence_US = sns.relplot(data = games_dur, x = 'NA_Sales', y = 'Violent_US')
+plt.show()
+
+plt.xticks(rotation = 90)
+games_crime_dur = sns.jointplot(data = games_dur, x = "Year", y = 'Violent_US')
 plt.show()
