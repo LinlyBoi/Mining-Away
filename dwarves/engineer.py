@@ -53,8 +53,10 @@ games_dur['NA_Sales'] = games_dur['NA_Sales'].multiply(1000)
 
 plt.xticks(rotation = 90)
 games_violence_US = sns.relplot(data = games_dur, x = 'NA_Sales', y = 'Violent_US')
+plt.close(1)
 plt.show()
 
 plt.xticks(rotation = 90)
 games_crime_dur = sns.jointplot(data = games_dur, x = "Year", y = 'Violent_US')
+plt.close(1)
 plt.show()

@@ -2,10 +2,9 @@
 # Collects stuff from the rest of the scripts
 import pandas as pd
 import numpy as np
-import seaborn as sns
 # containment breach
 import scipy as scp
-import digger, gunner, scout
+import gunner, digger, gunner, scout
 
 # Instantiating globals to be used in other files
 global games_merged_dat
@@ -32,8 +31,8 @@ crime_CA = pd.read_excel("datasets/crime/clean_crime_canada_dataset.xlsx")
 
 crime_US = pd.read_csv("datasets/crime/report.csv")
 
-print(crime_US.isnull())
-print(crime_CA.isnull())
+print(crime_US.isnull().count())
+print(crime_CA.isnull().count())
 
 year_interval = gunner.year_interval(crime_US, crime_CA, "report_year", "year")
 

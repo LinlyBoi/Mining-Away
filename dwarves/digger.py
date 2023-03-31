@@ -1,7 +1,7 @@
 # Getting and combining data
 import pandas as pd
 import numpy as np
-from dwarves import scout
+import scout
 from numpy import ndarray
 from scipy.stats import binned_statistic
 
