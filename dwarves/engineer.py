@@ -2,6 +2,7 @@
 import matplotlib.pyplot as plt
 import seaborn as sns
 import pandas as pd
+import plotly.express as exp
 import mining_hq
 from numpy import count_nonzero
 
@@ -17,7 +18,8 @@ custom_params = {"axes.spines.right": False, "axes.spines.top": False}
 sns.set_theme(style = 'ticks', rc = custom_params)
 
 plt.xticks(rotation = 90)
-games_fig_pre = sns.histplot(data = games_pre, x = "Year", palette = sns.color_palette("flare"), kde = True)
+games_fig_pre = sns.histplot(data = games_pre, x = "Year", kde = True)
+games_fig_pre.set_title('Game Sales Pre-2000')
 plt.show()
 
 plt.xticks(rotation = 90)
@@ -60,3 +62,7 @@ plt.xticks(rotation = 90)
 games_crime_dur = sns.jointplot(data = games_dur, x = "Year", y = 'Violent_US')
 plt.close(1)
 plt.show()
+
+# Need to floor the years, shows trailing bars on the histogram :/
+test_fig = exp.histogram(games_dur, x = "Year")
+test_fig.show()

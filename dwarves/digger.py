@@ -29,7 +29,6 @@ def slam_dunk(dataset, column, labels):
     max_value = dataset[column].max()
     print("min: ", min_value, " max: ", max_value)
     bins = np.linspace(min_value, max_value, len(labels) + 1)
-    bins
 
     dunked_column = "bin_" + column
     dataset[dunked_column] = pd.cut(
