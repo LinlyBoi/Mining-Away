@@ -8,6 +8,7 @@ import scipy as scp
 from sklearn.model_selection import train_test_split
 from sklearn.cluster import KMeans
 from sklearn import metrics
+from sklearn.naive_bayes import GaussianNB
 import gunner
 import digger
 import scout
@@ -145,3 +146,7 @@ silh_score = metrics.silhouette_score(
 print(silh_score)
 gammas_train["Kmean Labels"] = gammas_labels
 print(gammas_train.head())
+
+# Naive based
+gnb = GaussianNB()
+prediction = gnb.fit(gammas_train)
