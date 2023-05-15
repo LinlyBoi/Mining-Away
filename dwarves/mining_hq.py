@@ -8,7 +8,9 @@ import scipy as scp
 from sklearn.model_selection import train_test_split
 from sklearn.cluster import KMeans
 from sklearn import metrics
-import gunner, digger, gunner, scout
+import gunner
+import digger
+import scout
 
 # Instantiating globals to be used in other files
 global games_merged_dat
