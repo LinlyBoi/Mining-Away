@@ -140,3 +140,5 @@ output.csv
 output.xlsx
 
 .gitignore
+datasets/videogames/games_train.csv
+datasets/videogames/games_test.csv

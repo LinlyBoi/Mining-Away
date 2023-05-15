@@ -2,9 +2,16 @@
 # Collects stuff from the rest of the scripts
 import pandas as pd
 import numpy as np
+
 # containment breach
 import scipy as scp
-import gunner, digger, gunner, scout
+from sklearn.model_selection import train_test_split
+from sklearn.cluster import KMeans
+from sklearn import metrics
+from sklearn.naive_bayes import GaussianNB
+import gunner
+import digger
+import scout
 
 # Instantiating globals to be used in other files
 global games_merged_dat
@@ -13,7 +20,9 @@ global games_sales_split_dur
 global games_sales_split_pos
 
 games_review = pd.read_csv("datasets/videogames/Games.xls")
-games_sales = scout.cure_depression(pd.read_csv("datasets/videogames/vgsales-12-4-2019-short.csv"))
+games_sales = scout.cure_depression(
+    pd.read_csv("datasets/videogames/vgsales-12-4-2019-short.csv")
+)
 
 print(games_review.count())
 print(games_sales.count())
@@ -22,6 +31,7 @@ games_review_phase1 = digger.slice_column(games_review, "GameName", "Review")
 games_review_final = digger.slice_column(games_review, "GameName", "(Import)")
 
 games_merged_dat = digger.write_joined_df(games_sales, games_review_final)
+
 
 # Acquisition of Merged dataset
 print(games_merged_dat.count())
@@ -103,15 +113,15 @@ gammas = digger.slam_dunk(gammas, "Critic_Score", labels=labels)
 # Also need to transform using Z-score (normal distr go brrrr lmao), or min-max
 # ah, scheiße
 # nvm, done, kekW
-gammas['Critic_Score_Norm'] = scout.scaling_zscore(gammas, 'Critic_Score')
-print(gammas['Critic_Score_Norm'].head(10))
+gammas["Critic_Score_Norm"] = scout.scaling_zscore(gammas, "Critic_Score")
+print(gammas["Critic_Score_Norm"].head(10))
 
 # Saving all into a file
+gammas = gammas.dropna(how="any", axis=0)  # nuke them empty poopers
 gammas.to_csv("datasets/videogames/games_cleanish.csv", index=False)
-
 # Need similarity and dissimialrity, scipy time
 # Selecting 5 random rows
-chosen_idx = np.random.choice(len(gammas), replace = False, size = 5)
+chosen_idx = np.random.choice(len(gammas), replace=False, size=5)
 sample_rows = gammas.iloc[chosen_idx]
 print(sample_rows.head())
 
