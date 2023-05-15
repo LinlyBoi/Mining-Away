@@ -6,6 +6,8 @@ import numpy as np
 # containment breach
 import scipy as scp
 from sklearn.model_selection import train_test_split
+from sklearn.cluster import KMeans
+from sklearn import metrics
 import gunner, digger, gunner, scout
 
 # Instantiating globals to be used in other files
@@ -114,11 +116,6 @@ print(gammas["Critic_Score_Norm"].head(10))
 # Saving all into a file
 gammas = gammas.dropna(how="any", axis=0)  # nuke them empty poopers
 gammas.to_csv("datasets/videogames/games_cleanish.csv", index=False)
-# split the data set
-gammas_train, gammas_test = train_test_split(gammas, test_size=0.20, random_state=69)
-gammas_train.to_csv("datasets/videogames/games_train.csv", index=False)
-gammas_test.to_csv("datasets/videogames/games_test.csv", index=False)
-
 # Need similarity and dissimialrity, scipy time
 # Selecting 5 random rows
 chosen_idx = np.random.choice(len(gammas), replace=False, size=5)
@@ -127,3 +124,22 @@ print(sample_rows.head())
 
 scout.dissimilarity(sample_rows)
 scout.similarity(sample_rows)
+# split the data set
+gammas_train, gammas_test = train_test_split(gammas, test_size=0.20, random_state=69)
+gammas_train.to_csv("datasets/videogames/games_train.csv", index=False)
+gammas_test.to_csv("datasets/videogames/games_test.csv", index=False)
+
+# kmeans pls
+gammas_train_kmeans = KMeans(n_clusters=10, random_state=420, n_init="auto").fit(
+    gammas_train[["Critic_Score", "User_Score", "Total_Shipped"]]
+)
+gammas_labels = gammas_train_kmeans.labels_
+
+silh_score = metrics.silhouette_score(
+    gammas_train[["Critic_Score", "User_Score", "Total_Shipped"]],
+    gammas_labels,
+    metric="euclidean",
+)
+print(silh_score)
+gammas_train["Kmean Labels"] = gammas_labels
+print(gammas_train.head())
